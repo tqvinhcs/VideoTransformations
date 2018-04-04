@@ -481,7 +481,7 @@ def _demo_read_clip():
     Demo reading video clips then performing random crop and flip for augmentation
     """
     data_format = 'channels_first'
-    frame_dir = '/mnt/disk/data/tqvinh/UCF-101/frames/Archery/v_Archery_g01_c01/'
+    frame_dir = './frames/'
     paths = [frame_dir + 'frm_%06d.jpg' % (f + 1) for f in range(0, 0 + 16)]
 
     # List of transformations used
