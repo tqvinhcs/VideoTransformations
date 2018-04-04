@@ -1,6 +1,6 @@
 """
 Video augmentation for deep learning
-The framework is general and can be used for any framwork such as pytorch, tensorflow or keras
+The framework is general and can be used for any framework such as pytorch, tensorflow or keras
 Written by: Quang Vinh Tran
 Date created: 04/03/2018
 Fate modified: 04/04/2018
