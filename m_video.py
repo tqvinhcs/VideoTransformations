@@ -496,6 +496,7 @@ def _demo_read_clip():
     print read_clip
     for t in test_transforms.transforms:
         print t
+    print montage
 
     # time it
     from time import time
