@@ -1,5 +1,4 @@
-# VideoTransformations
-## Video transformation for deep learning
+# Video transformations for deep learning
 | Options              | Finished  |
 | -------------------- |-----|
 | ReadClip             | <ul><li>- [x] </li></ul> |
