@@ -20,7 +20,7 @@ _str_to_cv2_interp = {
 class ReadClip(object):
     """Read video clip in color format"""
     def __init__(self, size=None, mode='RGB', interp='bilinear', data_format='channels_last'):
-        assert isinstance(size, (int, list, tuple)), 'Size must be an integer or list of integers (or None)'
+        assert isinstance(size, (int, list, tuple)), 'Size must be an integer or a pair of (height, width) or None'
         assert mode in ('RGB', 'BGR'), 'Mode is either "RGB" or "BGR"'
         assert interp in _str_to_cv2_interp, 'Interp are %s' % _str_to_cv2_interp
         assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
@@ -42,7 +42,8 @@ class ReadClip(object):
                 im = im[:, :, ::-1]
 
             if self.size is not None:
-                im = cv2.resize(im, dsize=self.size, interpolation=self.interp)
+                # cv2.resize parameter dsize=(width, height)
+                im = cv2.resize(im, dsize=self.size[::-1], interpolation=self.interp)
 
             clip.append(im)
 
@@ -304,7 +305,7 @@ class Resize(object):
     """Resize video clip to a defined size"""
 
     def __init__(self, size=(112, 112), interp='bilinear', data_format='channels_first'):
-        assert isinstance(size, (int, list, tuple)), 'Size must be an integer or list of integers'
+        assert isinstance(size, (int, list, tuple)), 'Size must be an integer or a pair of (height, width)'
         assert interp in _str_to_cv2_interp, 'Interp is %s' % _str_to_cv2_interp
         assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
 
@@ -317,8 +318,8 @@ class Resize(object):
     def __call__(self, clip):
         if not self.channels_last:
             clip = np.transpose(clip, axes=(1, 2, 3, 0))
-
-        out_clip = [cv2.resize(img, dsize=self.size, interpolation=self.interp) for img in clip]
+        # cv2.resize parameter dsize=(width, height)
+        out_clip = [cv2.resize(img, dsize=self.size[::-1], interpolation=self.interp) for img in clip]
         out_clip = np.array(out_clip, dtype=clip.dtype)
 
         if self.channels_last:
