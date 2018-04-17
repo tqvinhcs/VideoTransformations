@@ -24,7 +24,7 @@ class Read(object):
             assert isinstance(size, (int, list, tuple)), 'Size must be an integer or a pair of (height, width) or None'
         assert mode in ('RGB', 'BGR'), 'Mode is either "RGB" or "BGR"'
         assert interp in _str_to_cv2_interp, 'Interp are %s' % _str_to_cv2_interp
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.size = None if size is None else (size, size) if isinstance(size, int) else size
         self.mode = mode
@@ -90,7 +90,7 @@ class RandomCrop(object):
     def __init__(self, height=(128, 112, 96, 84), width=(128, 112, 96, 84), data_format='channels_first'):
         assert isinstance(height, (int, list, tuple)), 'Height must be an integer or list of integers'
         assert isinstance(width, (int, list, tuple)), 'Width must be an integer or list of integers'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.height = height if isinstance(height, (list, tuple)) else [height]
         self.width = width if isinstance(width, (list, tuple)) else [width]
@@ -130,7 +130,7 @@ class RandomCornerCrop(object):
     def __init__(self, height=(128, 112, 96, 84), width=(128, 112, 96, 84), data_format='channels_first'):
         assert isinstance(height, (int, list, tuple)), 'Height must be an integer or list of integers'
         assert isinstance(width, (int, list, tuple)), 'Width must be an integer or list of integers'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.height = height if isinstance(height, (list, tuple)) else [height]
         self.width = width if isinstance(width, (list, tuple)) else [width]
@@ -168,7 +168,7 @@ class CenterCrop(object):
 
     def __init__(self, size, data_format='channels_first'):
         assert isinstance(size, (int, list, tuple)), 'Size must be an integer or list of integers'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.size = (size, size) if isinstance(size, int) else size
 
@@ -201,7 +201,7 @@ class FiveCrop(object):
 
     def __init__(self, size, data_format='channels_first'):
         assert isinstance(size, (int, list, tuple)), 'Size must be an integer or list of integers'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.size = (size, size) if isinstance(size, int) else size
 
@@ -245,7 +245,7 @@ class TenCrop(object):
     def __init__(self, size, flip='horizontal', data_format='channels_first'):
         assert isinstance(size, (int, list, tuple)), 'Size must be an integer or list of integers'
         assert flip in ('horizontal', 'vertical'), 'Mode is either "horizontal" or "vertical"'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.size = (size, size) if isinstance(size, int) else size
         
@@ -312,7 +312,7 @@ class Resize(object):
     def __init__(self, size=(112, 112), interp='bilinear', data_format='channels_first'):
         assert isinstance(size, (int, list, tuple)), 'Size must be an integer or a pair of (height, width)'
         assert interp in _str_to_cv2_interp, 'Interp is %s' % _str_to_cv2_interp
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.size = (size, size) if isinstance(size, int) else size
         self.interp = _str_to_cv2_interp[interp]
@@ -342,7 +342,7 @@ class RandomHorizontalFlip(object):
 
     def __init__(self, p=0.5, data_format='channels_first'):
         assert 0 <= p <= 1, 'Value of p must be between 0 and 1'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.p = p
 
@@ -370,7 +370,7 @@ class RandomVerticalFlip(object):
 
     def __init__(self, p=0.5, data_format='channels_first'):
         assert 0 <= p <= 1, 'Value of p must be between 0 and 1'
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert data_format in ('channels_first', 'channels_last'), 'Data format is either "channels_first" or "channels_last"'
 
         self.p = p
 
@@ -397,7 +397,7 @@ class Montage(object):
     """Create a montage image H x W x C for video clips"""
 
     def __init__(self, stack=True, input_format='channels_last'):
-        assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert input_format in ('channels_first', 'channels_last'), 'Input format is either "channels_first" or "channels_last"'
 
         self.stack = stack
         self.input_format = input_format
@@ -428,7 +428,7 @@ class ToTensor(object):
     """Convert a numpy array clip in range [0, 255] to a numpy array clip channels_first format in range [0.0, 1.0]"""
 
     def __init__(self, norm=255, input_format='channels_first'):
-        assert input_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert input_format in ('channels_first', 'channels_last'), 'Input format is either "channels_first" or "channels_last"'
         self.norm = norm
 
         self.input_format = input_format
@@ -451,7 +451,7 @@ class ToBatchTensor(object):
     """Convert numpy array clips in range [0, 255] to numpy array clips channels_first format in range [0.0, 1.0]"""
 
     def __init__(self, norm=255, input_format='channels_first'):
-        assert input_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
+        assert input_format in ('channels_first', 'channels_last'), 'Input format is either "channels_first" or "channels_last"'
         self.norm = norm
 
         self.input_format = input_format
