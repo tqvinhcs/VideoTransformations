@@ -262,16 +262,16 @@ class TenCrop(object):
             # T x H x W x C
             height, width = clip.shape[1], clip.shape[2]
             if self.vertical_flip:
-                flip = np.flip(clip, axis=1)
+                flip = np.flip(clip, axis=1).copy()
             else:
-                flip = np.flip(clip, axis=2)
+                flip = np.flip(clip, axis=2).copy()
         else:
             # C x T x H x W
             height, width = clip.shape[2], clip.shape[3]
             if self.vertical_flip:
-                flip = np.flip(clip, axis=2)
+                flip = np.flip(clip, axis=2).copy()
             else:
-                flip = np.flip(clip, axis=3)
+                flip = np.flip(clip, axis=3).copy()
 
         offsets = [[0, 0], [0, width - size[1]], [height - size[0], 0], [height - size[0], width - size[1]],
                    [np.ceil((height - size[0]) / 2).astype(int), np.ceil((width - size[1]) / 2).astype(int)]]
