@@ -241,13 +241,16 @@ class FiveCrop(object):
 class TenCrop(object):
     """Crop 10 voxels from video clip of size height and width, i.e, crop 5 then flip"""
 
-    def __init__(self, size, vertical_flip=True, data_format='channels_first'):
+    def __init__(self, size, flip='horizontal', data_format='channels_first'):
         assert isinstance(size, (int, list, tuple)), 'Size must be an integer or list of integers'
+        assert flip in ('horizontal', 'vertical'), 'Mode is either "horizontal" or "vertical"'
         assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
 
         self.size = (size, size) if isinstance(size, int) else size
-        self.vertical_flip = vertical_flip
-
+        
+        self.flip = flip
+        self.vertical_flip = True if self.flip is 'vertical' else False
+        
         self.data_format = data_format
         self.channels_last = True if data_format == 'channels_last' else False
 
@@ -257,15 +260,15 @@ class TenCrop(object):
         if self.channels_last:
             height, width = clip.shape[1], clip.shape[2]
             if self.vertical_flip:
-                flip = np.flip(clip, axis=2)
-            else:
                 flip = np.flip(clip, axis=1)
+            else:
+                flip = np.flip(clip, axis=2)
         else:
             height, width = clip.shape[2], clip.shape[3]
             if self.vertical_flip:
-                flip = np.flip(clip, axis=3)
-            else:
                 flip = np.flip(clip, axis=2)
+            else:
+                flip = np.flip(clip, axis=3)
 
         offsets = [[0, 0], [0, width - size[1]], [height - size[0], 0], [height - size[0], width - size[1]],
                    [np.ceil((height - size[0]) / 2).astype(int), np.ceil((width - size[1]) / 2).astype(int)]]
@@ -296,8 +299,7 @@ class TenCrop(object):
         return c_tl, c_tr, c_bl, c_br, c_ct, f_tl, f_tr, f_bl, f_br, f_ct
 
     def __repr__(self):
-        params = '(size={0}, vertical_flip={1}, data_format={2})'.format(self.size, self.vertical_flip,
-                                                                         self.data_format)
+        params = '(size={0}, flip={1}, data_format={2})'.format(self.size, self.flip, self.data_format)
         return self.__class__.__name__ + params
 
 
