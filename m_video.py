@@ -17,7 +17,7 @@ _str_to_cv2_interp = {
 }
 
 
-class ReadClip(object):
+class Read(object):
     """Read video clip in color format"""
     def __init__(self, size=None, mode='RGB', interp='bilinear', data_format='channels_last'):
         if size is not None:
@@ -489,7 +489,7 @@ def _demo_read_clip():
     paths = [frame_dir + 'frm_%06d.jpg' % (f + 1) for f in range(0, 0 + 16)]
 
     # List of transformations used
-    read_clip = ReadClip(size=(128, 171), mode='RGB', interp='bilinear', data_format=data_format)
+    read_clip = Read(size=(128, 171), mode='RGB', interp='bilinear', data_format=data_format)
     montage = Montage(stack=True, data_format=data_format)
     test_transforms = Compose([RandomCrop(data_format=data_format),
                                RandomHorizontalFlip(p=0.5, data_format=data_format),
