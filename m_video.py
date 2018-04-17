@@ -20,7 +20,8 @@ _str_to_cv2_interp = {
 class ReadClip(object):
     """Read video clip in color format"""
     def __init__(self, size=None, mode='RGB', interp='bilinear', data_format='channels_last'):
-        assert isinstance(size, (int, list, tuple)), 'Size must be an integer or a pair of (height, width) or None'
+        if size is not None:
+            assert isinstance(size, (int, list, tuple)), 'Size must be an integer or a pair of (height, width) or None'
         assert mode in ('RGB', 'BGR'), 'Mode is either "RGB" or "BGR"'
         assert interp in _str_to_cv2_interp, 'Interp are %s' % _str_to_cv2_interp
         assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
