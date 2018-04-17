@@ -259,12 +259,14 @@ class TenCrop(object):
         size = self.size
 
         if self.channels_last:
+            # T x H x W x C
             height, width = clip.shape[1], clip.shape[2]
             if self.vertical_flip:
                 flip = np.flip(clip, axis=1)
             else:
                 flip = np.flip(clip, axis=2)
         else:
+            # C x T x H x W
             height, width = clip.shape[2], clip.shape[3]
             if self.vertical_flip:
                 flip = np.flip(clip, axis=2)
@@ -350,8 +352,10 @@ class RandomHorizontalFlip(object):
     def __call__(self, clip):
         if np.random.rand(1, 1).squeeze() > self.p:
             if self.channels_last:
+                # T x H x W x C
                 return np.flip(clip, axis=2).copy()
             else:
+                # C x T x H x W
                 return np.flip(clip, axis=3).copy()
 
         return clip
@@ -376,8 +380,10 @@ class RandomVerticalFlip(object):
     def __call__(self, clip):
         if np.random.rand(1, 1).squeeze() > self.p:
             if self.channels_last:
+                # T x H x W x C
                 return np.flip(clip, axis=1).copy()
             else:
+                # C x T x H x W
                 return np.flip(clip, axis=2).copy()
 
         return clip
@@ -388,14 +394,14 @@ class RandomVerticalFlip(object):
 
 
 class Montage(object):
-    """Create a montage image for video clips"""
+    """Create a montage image H x W x C for video clips"""
 
-    def __init__(self, stack=True, data_format='channels_first'):
+    def __init__(self, stack=True, input_format='channels_last'):
         assert data_format in ('channels_first', 'channels_last'), 'Mode is either "channels_first" or "channels_last"'
 
         self.stack = stack
-        self.data_format = data_format
-        self.channels_last = True if data_format == 'channels_last' else False
+        self.input_format = input_format
+        self.channels_last = True if input_format == 'channels_last' else False
 
     def __call__(self, clips):
         clips = np.array(clips)
@@ -414,7 +420,7 @@ class Montage(object):
         return imgs
 
     def __repr__(self):
-        params = '(stack={0}, data_format={1})'.format(self.stack, self.data_format)
+        params = '(stack={0}, data_format={1})'.format(self.stack, self.input_format)
         return self.__class__.__name__ + params
 
 
