@@ -347,9 +347,9 @@ class RandomHorizontalFlip(object):
     def __call__(self, clip):
         if np.random.rand(1, 1).squeeze() > self.p:
             if self.channels_last:
-                return np.flip(clip, axis=2)
+                return np.flip(clip, axis=2).copy()
             else:
-                return np.flip(clip, axis=3)
+                return np.flip(clip, axis=3).copy()
 
         return clip
 
@@ -373,9 +373,9 @@ class RandomVerticalFlip(object):
     def __call__(self, clip):
         if np.random.rand(1, 1).squeeze() > self.p:
             if self.channels_last:
-                return np.flip(clip, axis=1)
+                return np.flip(clip, axis=1).copy()
             else:
-                return np.flip(clip, axis=2)
+                return np.flip(clip, axis=2).copy()
 
         return clip
 
