@@ -496,7 +496,7 @@ def _demo_read_clip():
 
     # List of transformations used
     read_clip = Read(size=(128, 171), mode='RGB', interp='bilinear', data_format=data_format)
-    montage = Montage(stack=True, data_format=data_format)
+    montage = Montage(stack=True, input_format=data_format)
     test_transforms = Compose([RandomCrop(data_format=data_format),
                                RandomHorizontalFlip(p=0.5, data_format=data_format),
                                RandomVerticalFlip(p=0.5, data_format=data_format),
