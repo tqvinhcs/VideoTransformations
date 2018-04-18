@@ -1,4 +1,11 @@
 # Video transformations for deep learning
+## Works with both image and feature map
+## Prerequisites
+```
+numpy >= 1.12
+cv2
+```
+
 | Options              | Finished  |
 | -------------------- |-----|
 | ReadClip             | <ul><li>- [x] </li></ul> |
