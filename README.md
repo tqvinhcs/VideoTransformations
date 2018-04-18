@@ -1,5 +1,8 @@
 # Video transformations for deep learning
-## Works with both image and feature map
+
+* Works with both image and feature map
+* Video input is simply a numpy array (no need of PIL).
+
 ## Prerequisites
 ```
 numpy >= 1.12
