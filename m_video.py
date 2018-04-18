@@ -478,6 +478,10 @@ class Normalize(object):
         self.std = std
 
     def __call__(self, clip):
+        """
+        :param clip: clip of size C x T x H x W to be normalized.
+        :return: 
+        """
         for t, m, s in zip(clip, self.mean, self.std):
             t.__sub__(m).__div__(s)
         return clip
