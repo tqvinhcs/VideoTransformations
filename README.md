@@ -2,6 +2,7 @@
 
 * Works with both image and feature map
 * Video input is simply a numpy array (no need of PIL).
+* Supports both channels first and channels last
 
 ## Prerequisites
 ```
