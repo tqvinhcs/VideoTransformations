@@ -474,14 +474,17 @@ class Normalize(object):
     """Normalize a clip with mean and standard deviation (z-score normalization)"""
 
     def __init__(self, mean, std):
-        self.mean = mean
-        self.std = std
+        self.mean = np.array(mean, dtype=np.float32)
+        self.std = np.array(std, dtype=np.float32)
 
     def __call__(self, clip):
         """
         :param clip: clip of size C x T x H x W to be normalized.
         :return: 
         """
+        assert clip.shape[0] == self.mean.shape[0], 'Input clip must be in "channels_first" format'
+        assert clip.shape[0] == self.std.shape[0], 'Input clip must be in "channels_first" format'
+        
         for t, m, s in zip(clip, self.mean, self.std):
             t.__sub__(m).__div__(s)
         return clip
