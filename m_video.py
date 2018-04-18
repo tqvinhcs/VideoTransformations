@@ -529,7 +529,7 @@ def _demo_read_clip():
     print 'Min:', img.min(), 'Max:', img.max()
 
     # Saving to a single images, each row is each clip
-    cv2.imwrite('clips.png', np.asarray(img.__mul__(255)[:, :, ::-1], dtype=np.uint8))
+    cv2.imwrite('clips.jpg', np.asarray(img.__mul__(255)[:, :, ::-1], dtype=np.uint8))
 
 
 if __name__ == '__main__':
