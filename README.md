@@ -14,3 +14,4 @@
 | Montage              | <ul><li>- [x] </li></ul> |
 | ToTensor             | <ul><li>- [x] </li></ul> |
 | ToBatchTensor        | <ul><li>- [x] </li></ul> |
+| Normalize            | <ul><li>- [x] </li></ul> |
