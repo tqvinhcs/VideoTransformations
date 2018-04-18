@@ -11,7 +11,7 @@ cv2
 ## Options
 | Options              | Finished  |
 | -------------------- |-----|
-| ReadClip             | <ul><li>- [x] </li></ul> |
+| Read                 | <ul><li>- [x] </li></ul> |
 | Compose              | <ul><li>- [x] </li></ul> |
 | RandomCrop           | <ul><li>- [x] </li></ul> |
 | RandomCornerCrop     | <ul><li>- [x] </li></ul> |
