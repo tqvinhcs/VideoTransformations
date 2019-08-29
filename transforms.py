@@ -509,7 +509,7 @@ def _test():
             data += [vid[:, i, :, :] for i in range(vid.shape[1])]
         data = torch.stack(data)
 
-        save_image(data, './data/temp/vid_%d.jpg' % i_batch, nrow=16)
+        save_image(data, './temp/vid_%d.jpg' % i_batch, nrow=16)
 
 
 def _test_imgs():
@@ -561,7 +561,7 @@ def _test_imgs():
 
     for i_batch, (inputs, targets) in enumerate(train_loader):
         print(i_batch, inputs.shape, targets.shape, inputs.min(), inputs.max())
-        save_image(inputs, './data/temp/img_%d.jpg' % i_batch, nrow=8)
+        save_image(inputs, './temp/img_%d.jpg' % i_batch, nrow=8)
 
 
 if __name__ == "__main__":
