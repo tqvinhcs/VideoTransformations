@@ -455,7 +455,7 @@ def _test():
 
     class VerbRgb(Dataset):
         def __init__(self, is_val=False, transforms=None):
-            self.video_list = [VideoRecord(x.strip().split(' ')) for x in ['/Users/tqvinh/Documents/lib/c3d/data/roger/ 16 0'] * 30]
+            self.video_list = [VideoRecord(x.strip().split(' ')) for x in ['./frames/ 16 0'] * 30]
             self.transforms = transforms
             self.is_val = is_val
 
@@ -472,7 +472,7 @@ def _test():
                 if not self.is_val:
                     offset = np.random.randint(0, diff)
 
-            frames = [Image.open(os.path.join(record.path, 'frame_%06d.png' % (x + 1))) for x in range(offset, offset + min(num_frames_necessary, record.num_frames))]
+            frames = [Image.open(os.path.join(record.path, 'frm_%05d.jpg' % (x + 1))) for x in range(offset, offset + min(num_frames_necessary, record.num_frames))]
 
             if len(frames) < num_frames_necessary:
                 # Pad last frame if video is shorter than necessary
@@ -535,7 +535,7 @@ def _test_imgs():
 
     class VerbRgb(Dataset):
         def __init__(self, is_val=False, transforms=None):
-            self.video_list = [VideoRecord(x.strip().split(' ')) for x in ['/Users/tqvinh/Documents/lib/c3d/data/roger/frame_000001.png 16 0'] * 32]
+            self.video_list = [VideoRecord(x.strip().split(' ')) for x in ['./frames/frm_00010.jpg 16 0'] * 32]
             self.transforms = transforms
             self.is_val = is_val
 
